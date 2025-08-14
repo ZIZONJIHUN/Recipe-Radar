@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
+/* Airbnb Theme CSS Variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colors */
+  --color-primary: #FF385C;
+  --color-primary-light: #FF5A73;
+  --color-primary-dark: #E31E3F;
+  --color-primary-contrast: #FFFFFF;
+  
+  /* Neutral Colors */
+  --color-neutral-white: #FFFFFF;
+  --color-neutral-black: #000000;
+  --color-neutral-gray-900: #222222;
+  --color-neutral-gray-700: #6A6A6A;
+  --color-neutral-gray-500: #EBEBEB;
+  --color-neutral-gray-400: #DDDDDD;
+  --color-neutral-gray-300: #F2F2F2;
+  --color-neutral-gray-200: #F7F7F7;
+  --color-neutral-gray-100: #C1C1C1;
+  
+  /* Semantic Colors */
+  --color-semantic-error: #FF385C;
+  --color-semantic-warning: #FFB400;
+  --color-semantic-success: #00A86B;
+  --color-semantic-info: #0085FF;
+  
+  /* Background and Foreground */
+  --background: var(--color-neutral-white);
+  --foreground: var(--color-neutral-gray-900);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Airbnb Cereal VF", Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
 }
 
+/* Light Mode (Default - White Mode) */
+.light {
+  --background: var(--color-neutral-white);
+  --foreground: var(--color-neutral-gray-900);
+  
+  /* Light mode specific colors */
+  --card-bg: var(--color-neutral-white);
+  --card-border: var(--color-neutral-gray-400);
+  --muted-bg: var(--color-neutral-gray-200);
+  --muted-foreground: var(--color-neutral-gray-700);
+  --border-color: var(--color-neutral-gray-400);
+  --hover-bg: var(--color-neutral-gray-200);
+}
+
+/* Dark Mode */
+.dark {
+  --background: var(--color-neutral-gray-900);
+  --foreground: var(--color-neutral-white);
+  
+  /* Dark mode specific colors */
+  --card-bg: #2A2A2A;
+  --card-border: #404040;
+  --muted-bg: #404040;
+  --muted-foreground: #ACACAC;
+  --border-color: #404040;
+  --hover-bg: #404040;
+  
+  /* Adjust semantic colors for dark mode */
+  --color-neutral-gray-200: #404040;
+  --color-neutral-gray-300: #2A2A2A;
+  --color-neutral-gray-400: #505050;
+  --color-neutral-gray-500: #606060;
+}
+
+/* System preference fallback */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not(.light):not(.dark) {
+    --background: var(--color-neutral-gray-900);
+    --foreground: var(--color-neutral-white);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Airbnb Cereal VF", Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  line-height: 1.4;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-neutral-gray-300);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-gray-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neutral-gray-700);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 250ms;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
